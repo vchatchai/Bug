@@ -1,6 +1,6 @@
 package com.bug.client.spider.ui.ui;
 
-import com.bug.client.hcm.view.LoginView;
+import com.bug.client.hcm.view.EmailLoginView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -13,7 +13,7 @@ import gwt.material.design.client.ui.MaterialButton;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialToast;
 
-public class MaterialLogin extends Composite implements LoginView {
+public class MaterialLogin extends Composite implements EmailLoginView {
 
 	private static MaterialLoginUiBinder uiBinder = GWT.create(MaterialLoginUiBinder.class);
 

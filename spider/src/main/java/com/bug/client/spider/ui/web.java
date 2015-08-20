@@ -3,7 +3,7 @@ package com.bug.client.spider.ui;
 import org.fusesource.restygwt.client.Defaults;
 
 import com.bug.client.hcm.factory.LoginClientFactory;
-import com.bug.client.hcm.presenter.LoginPresenter;
+import com.bug.client.hcm.presenter.EmailLoginPresenter;
 import com.bug.client.spider.ui.ui.MaterialLogin;
 import com.google.api.gwt.oauth2.client.Auth;
 import com.google.api.gwt.oauth2.client.AuthRequest;
@@ -24,7 +24,7 @@ public class web implements EntryPoint {
 
 	private LoginClientFactory clientFactory = new ClientFactoryImpl();
 	private MaterialLogin loginView = null;
-	private LoginPresenter loginPresenter = null;
+	private EmailLoginPresenter loginPresenter = null;
 	EventBus eventBus = new SimpleEventBus();
 
 	/**
@@ -55,7 +55,7 @@ public class web implements EntryPoint {
 		Defaults.setServiceRoot(GWT.getModuleBaseURL().replace("web", "rest"));
 		loginView = (MaterialLogin) clientFactory.getLoginView();
 
-		loginPresenter = new LoginPresenter(loginView, eventBus, clientFactory.getAuthenticationResource());
+		loginPresenter = new EmailLoginPresenter(loginView, eventBus, clientFactory.getAuthenticationResource());
 		loginView.setLoginPresenter(loginPresenter);
 
 		loginPresenter.go(RootPanel.get());

@@ -1,18 +1,32 @@
 package com.bug.client.hcm.view;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Proxy;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
 import org.mockito.runners.MockitoJUnitRunner;
 //import static org.hamcrest.Matchers.containsString;
+import org.mockito.stubbing.Answer;
 
+import com.bug.client.common.webservice.RestProxyClassStandAlone;
 import com.bug.client.common.webservice.RestServiceFactory;
 import com.bug.client.hcm.factory.LoginClientFactory;
-import com.bug.client.hcm.presenter.LoginPresenter;
+import com.bug.client.hcm.presenter.EmailLoginPresenter;
 import com.bug.client.hcm.webservice.AuthenticationResource;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
@@ -20,64 +34,64 @@ import com.google.web.bindery.event.shared.SimpleEventBus;
 @RunWith(MockitoJUnitRunner.class)
 public class LoginViewTest {
 	EventBus eventBus = new SimpleEventBus();
+	AuthenticationResource proxy = null;
+
+	AuthenticationResource loginResourceClient = new LoginResourceClientTestImp();
+	EmailLoginView loginViewTest = null;
+	LoginClientFactory clientFactory = null;
+	EmailLoginPresenter loginPresenter = null;
+
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+	}
+
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+	}
+
+	@Before
+	public void setUp() throws Exception {
+		proxy = RestServiceFactory.getRestService(AuthenticationResource.class);
+		loginViewTest = Mockito.mock(EmailLoginView.class, Mockito.RETURNS_DEEP_STUBS);
+		clientFactory = Mockito.mock(LoginClientFactory.class);
+		loginResourceClient = new LoginResourceClientTestImp();
+
+		loginPresenter = new EmailLoginPresenter(loginViewTest, eventBus, proxy);
+
+	}
+
+	@After
+	public void tearDown() throws Exception {
+
+		RestProxyClassStandAlone.wait(proxy);
+	}
 
 	@Ignore
 	@Test
 	public void testWithOutServer() {
 
-		LoginView loginViewTest = Mockito.mock(LoginView.class);
-		LoginClientFactory clientFactory = Mockito.mock(LoginClientFactory.class);
-		AuthenticationResource loginResourceClient = new LoginResourceClientTestImp();
-
-		when(loginViewTest.getEmail()).thenReturn("ee56054@gmail.com");
-		when(loginViewTest.getPassword()).thenReturn("1234");
-
-		when(clientFactory.getLoginView()).thenReturn(loginViewTest);
-
-		when(clientFactory.getAuthenticationResource()).thenReturn(loginResourceClient);
-
-		LoginPresenter loginPresenter = new LoginPresenter(loginViewTest, eventBus,
-				clientFactory.getAuthenticationResource());
-
-		loginPresenter.login();
-
-		String result = loginViewTest.getEmail();
-		// assertThat(result, containsString("ee56054@gmail.com"));
-		assertEquals(result, "ee56054@gmail.com");
+//		EmailLoginView loginViewTest = Mockito.mock(EmailLoginView.class);
+//		LoginClientFactory clientFactory = Mockito.mock(LoginClientFactory.class);
+//		AuthenticationResource loginResourceClient = new LoginResourceClientTestImp();
+//
+//		when(loginViewTest.getEmail()).thenReturn("ee56054@gmail.com");
+//		when(loginViewTest.getPassword()).thenReturn("1234");
+//
+//		when(clientFactory.getLoginView()).thenReturn(loginViewTest);
+//
+//		when(clientFactory.getAuthenticationResource()).thenReturn(loginResourceClient);
+//
+//		loginPresenter.login();
+//
+//		String result = loginViewTest.getEmail();
+//		// assertThat(result, containsString("ee56054@gmail.com"));
+//		assertEquals(result, "ee56054@gmail.com");
 
 	}
 
+	// @Ignore
 	@Test
-	public void testWithServer() {
-		AuthenticationResource proxy = RestServiceFactory.getRestService(AuthenticationResource.class);
-		// proxy.createEmployee(new MethodCallback<Employee>() {
-		//
-		// public void onSuccess(Method method, Employee response) {
-		// // TODO Auto-generated method stub
-		// System.out.println("onSuccess");
-		// }
-		//
-		// public void onFailure(Method method, Throwable exception) {
-		// // TODO Auto-generated method stub
-		// System.out.println("onFailure");
-		//
-		// }
-		// });
-
-		LoginView loginViewTest = Mockito.mock(LoginView.class, Mockito.RETURNS_DEEP_STUBS);
-		LoginClientFactory clientFactory = Mockito.mock(LoginClientFactory.class);
-		AuthenticationResource loginResourceClient = new LoginResourceClientTestImp();
-
-		// final Dog mockedDog = Mockito.mock(Dog.class,
-		// Mockito.RETURNS_DEEP_STUBS);
-		// // connect getter and setter
-		// Mockito.when(mockedDog.getSound()).thenCallRealMethod();
-		// Mockito.doCallRealMethod().when(mockedDog).setSound(Mockito.any(Sound.class));
-
-		// Mockito.when(loginViewTest.getNotify()).
-
-		// when(loginViewTest.getNotify()).thenCallRealMethod();
-		// doCallRealMethod().when(loginViewTest).setNotify(anyString());
+	public void testLoginByEmail() throws InterruptedException {
 
 		when(loginViewTest.getEmail()).thenReturn("ee56054@gmail.com");
 		when(loginViewTest.getPassword()).thenReturn("1234");
@@ -86,19 +100,46 @@ public class LoginViewTest {
 
 		when(clientFactory.getAuthenticationResource()).thenReturn(loginResourceClient);
 
-		LoginPresenter loginPresenter = new LoginPresenter(loginViewTest, eventBus, proxy);
+		doAnswer(new Answer<String>() {
+			public String answer(InvocationOnMock invocationOnMock) throws Throwable {
+				when(loginViewTest.getNotify()).thenReturn((String) invocationOnMock.getArguments()[0]);
+				return null;
+			}
+		}).when(loginViewTest).setNotify(anyString());
 
 		loginPresenter.login();
-		System.out.println(loginViewTest.getNotify());
+		System.out.println("loginViewTest.getNotify:" + loginViewTest.getNotify());
 
-		// Mockito.doAnswer(invocation -> {
-		// short status = invocation.getArgumentAt(0, Short.class);
-		// Mockito.when(mockOrder.getStatus()).thenReturn(status);
-		// return null;
-		// }).when(mockOrder).setStatus(Mockito.anyShort());
-		// String result = loginViewTest.getEmail();
-		// assertThat(result, containsString("ee56054@gmail.com"));
-		// assertEquals(result, "ee56054@gmail.com");
+		assertNull(loginViewTest.getNotify());
+
+	}
+
+	// @Ignore
+	@Test
+	public void testLoginByEmailWithoutAtSignFail() throws InterruptedException {
+
+		when(loginViewTest.getEmail()).thenReturn("ee56054");
+		when(loginViewTest.getPassword()).thenReturn("1234");
+
+		when(clientFactory.getLoginView()).thenReturn(loginViewTest);
+
+		when(clientFactory.getAuthenticationResource()).thenReturn(loginResourceClient);
+
+		doAnswer(new Answer<String>() {
+			public String answer(InvocationOnMock invocationOnMock) throws Throwable {
+				when(loginViewTest.getNotify()).thenReturn((String) invocationOnMock.getArguments()[0]);
+				return null;
+			}
+		}).when(loginViewTest).setNotify(anyString());
+
+		loginPresenter.login();
+		System.out.println("loginViewTest.getNotify:" + loginViewTest.getNotify());
+
+		assertNotNull(loginViewTest.getNotify());
+
+		// Thread.currentThread().wait();
+
+		System.out.println("After Wait");
 
 	}
 

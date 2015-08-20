@@ -2,7 +2,7 @@ package com.bug.client.hcm.view;
 
 import com.google.gwt.user.client.ui.Widget;
 
-public interface LoginView {
+public interface EmailLoginView {
 	public String getEmail();
 
 	public String getPassword();

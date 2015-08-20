@@ -2,12 +2,14 @@ package com.bug.client.common.webservice;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 
 import org.fusesource.restygwt.client.MethodCallback;
 
 public class RestProxyClassStandAlone implements InvocationHandler {
 
 	private Object componentResource;
+	private Thread thread;
 
 	public RestProxyClassStandAlone(Object componentResource) {
 		this.componentResource = componentResource;
@@ -15,12 +17,36 @@ public class RestProxyClassStandAlone implements InvocationHandler {
 
 	public Object invoke(Object proxy, Method m, Object[] args) throws Throwable {
 
-		Thread thread = new ConnectionThread(componentResource, proxy, m, args); 
+		thread = new ConnectionThread(componentResource, proxy, m, args);
 		thread.start();
 
 		return null;
 
 	}
+
+	public Thread getThread() {
+		return thread;
+	}
+
+	public static void wait(Object proxy) throws InterruptedException {
+		InvocationHandler handler = Proxy.getInvocationHandler(proxy);
+		if (handler instanceof RestProxyClassStandAlone) {
+			RestProxyClassStandAlone restProxyClassStandAlone = (RestProxyClassStandAlone) handler;
+			synchronized (restProxyClassStandAlone.thread) {
+				try {
+					System.out.println("Wait");
+					restProxyClassStandAlone.thread.wait();
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} finally {
+
+					System.out.println("End Wait");
+				}
+			}
+		}
+	}
+
 }
 
 class ConnectionThread extends Thread {
@@ -60,12 +86,7 @@ class ConnectionThread extends Thread {
 			methodCallback.onFailure(method, e);
 		}
 
-	}
-}
-
-class JunitMethod extends org.fusesource.restygwt.client.Method {
-
-	public JunitMethod(String name) {
+		
 
 	}
 
