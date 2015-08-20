@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="common">
+	<!-- Inherit the core Web Toolkit stuff. -->
+	<inherits name='com.google.gwt.user.User' />
+
+	<!-- Specify the paths for translatable code -->
+
+	<!-- <source path='webservice/Test' /> -->
+
+	<!-- <source path='webservice/*' /> -->
+
+	<!-- <source path="" > </source> -->
+	<inherits name="com.bug.client.common.common" />
+	<inherits name="com.bug.client.hcm.hcm" />
+	<inherits name="com.bug.shared.hcm" />
+	<source path="webservice" />
+
+	<!-- <source path="webservice/Test" /> -->
+	<!-- <source path="com.bug.client.common.webservice.Test" ></source> -->
+
+
+	<inherits name="org.fusesource.restygwt.RestyGWT" />
+
+</module>
