@@ -3,6 +3,7 @@ package com.bug.framework.authentication.config;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.cache.MemoryConstrainedCacheManager;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.mgt.SecurityManager;
@@ -98,6 +99,7 @@ public class SecurityConfig {
 	public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor() {
 		AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
 		authorizationAttributeSourceAdvisor.setSecurityManager(securityManager());
+		SecurityUtils.setSecurityManager(securityManager);
 		return authorizationAttributeSourceAdvisor;
 	}
 
@@ -110,7 +112,7 @@ public class SecurityConfig {
 		// shiroFilter.setLoginUrl("/signin");
 		// shiroFilter.setUnauthorizedUrl("/index");
 		shiroFilter.setSecurityManager(securityManager);
-		
+
 		return shiroFilter;
 	}
 }

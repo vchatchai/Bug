@@ -15,8 +15,9 @@ public class RestProxyClassStandAlone implements InvocationHandler {
 
 	public Object invoke(Object proxy, Method m, Object[] args) throws Throwable {
 
-		Thread thread = new ConnectionThread(componentResource, proxy, m, args); 
+		Thread thread = new ConnectionThread(componentResource, proxy, m, args);
 		thread.start();
+//		thread.join(10000);
 
 		return null;
 
@@ -61,12 +62,4 @@ class ConnectionThread extends Thread {
 		}
 
 	}
-}
-
-class JunitMethod extends org.fusesource.restygwt.client.Method {
-
-	public JunitMethod(String name) {
-
-	}
-
 }

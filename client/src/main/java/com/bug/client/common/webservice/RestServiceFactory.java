@@ -10,11 +10,11 @@ public class RestServiceFactory {
 
 	public static <T> T getRestService(Class cls) {
 
-		SpringComponentResourceName springComponentResourceName = (SpringComponentResourceName) cls.getAnnotation(SpringComponentResourceName.class);
-		
-		Object componentResource =  AppMain.getApplicationContext().getBean(springComponentResourceName.value());
-		
-		
+		SpringComponentResourceName springComponentResourceName = (SpringComponentResourceName) cls
+				.getAnnotation(SpringComponentResourceName.class);
+
+		Object componentResource = AppMain.getApplicationContext().getBean(springComponentResourceName.value());
+
 		InvocationHandler handler = new RestProxyClassStandAlone(componentResource);
 		T proxy = (T) Proxy.newProxyInstance(cls.getClassLoader(), new Class[] { cls }, handler);
 		return proxy;

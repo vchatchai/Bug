@@ -67,6 +67,7 @@ public class LoginViewTest {
 		LoginView loginViewTest = Mockito.mock(LoginView.class, Mockito.RETURNS_DEEP_STUBS);
 		LoginClientFactory clientFactory = Mockito.mock(LoginClientFactory.class);
 		AuthenticationResource loginResourceClient = new LoginResourceClientTestImp();
+		// AppMain.getApplicationContext();
 
 		// final Dog mockedDog = Mockito.mock(Dog.class,
 		// Mockito.RETURNS_DEEP_STUBS);
@@ -100,6 +101,12 @@ public class LoginViewTest {
 		// assertThat(result, containsString("ee56054@gmail.com"));
 		// assertEquals(result, "ee56054@gmail.com");
 
+		try {
+			Thread.currentThread().join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
