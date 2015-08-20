@@ -1,0 +1,2 @@
+# Module com.bug.client.webJUnit.JUnit
+# RPC service class, partial path of RPC policy file

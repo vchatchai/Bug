@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='web'>
+	<!-- Inherit the core Web Toolkit stuff. -->
+	<inherits name='com.google.gwt.user.User' />
+
+	<!-- Inherit the default GWT style sheet. You can change -->
+	<!-- the theme of your GWT application by uncommenting -->
+	<!-- any one of the following lines. -->
+	<inherits name='com.google.gwt.user.theme.standard.Standard' />
+	<!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
+	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
+
+	<!-- Other module inherits -->
+	<inherits name="gwt.material.design.GwtMaterialDesign" />
+	<inherits name="com.bug.client.common"></inherits>
+	<inherits name="com.google.api.gwt.oauth2.OAuth2" />
+
+	<!-- Other module inherits -->
+	<inherits name="com.google.gwt.activity.Activity" />
+	<inherits name="com.google.gwt.place.Place" />
+	<!-- <inherits name="org.fusesource.restygwt.RestyGWT"/> -->
+	<!-- Specify the app entry point class. -->
+	<entry-point class='com.bug.client.spider.ui.web' />
+
+	<!-- Use ClientFactoryImpl by default -->
+	<replace-with class="com.bug.client.spider.ui.ClientFactoryImpl">
+		<when-type-is class="com.bug.client.common.webservice.ClientFactory" />
+	</replace-with>
+	<!-- Specify the paths for translatable code -->
+	<!-- <source path='com.bug.client.spider.ui' /> -->
+	<!-- <source path='com.bug.client.spider.resources' /> -->
+	<!-- <source path="com.bug.client.common.webservice.Test" ></source> -->
+	<source path='ui' />
+
+</module>

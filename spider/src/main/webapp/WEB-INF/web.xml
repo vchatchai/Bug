@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+
+	<!-- Servlets -->
+	<!-- <servlet> -->
+	<!-- <servlet-name>greetServlet</servlet-name> -->
+	<!-- <servlet-class>com.bug.client.server.GreetingServiceImpl</servlet-class> -->
+	<!-- </servlet> -->
+
+	<!-- <servlet-mapping> -->
+	<!-- <servlet-name>greetServlet</servlet-name> -->
+	<!-- <url-pattern>/web/greet</url-pattern> -->
+	<!-- </servlet-mapping> -->
+
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>web.html</welcome-file>
+	</welcome-file-list>
+	<listener>
+		<listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.jboss.resteasy.plugins.spring.SpringContextLoaderListener</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>Resteasy</servlet-name>
+		<servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Resteasy</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:com/bug/config/applicationContext.xml
+<!-- 			classpath:com/bug/config/spring-security.xml -->
+		</param-value>
+	</context-param>
+	<context-param>
+		<param-name>resteasy.servlet.mapping.prefix</param-name>
+		<param-value>/rest</param-value>
+	</context-param>
+
+	<!-- Shiro -->
+	<!-- <filter> -->
+	<!-- <filter-name>ShiroFilter</filter-name> -->
+	<!-- <filter-class>org.apache.shiro.web.servlet.ShiroFilter</filter-class> -->
+	<!-- </filter> -->
+
+	<!-- <filter-mapping> -->
+	<!-- <filter-name>ShiroFilter</filter-name> -->
+	<!-- <url-pattern>/*</url-pattern> -->
+	<!-- <dispatcher>REQUEST</dispatcher> -->
+	<!-- <dispatcher>FORWARD</dispatcher> -->
+	<!-- <dispatcher>INCLUDE</dispatcher> -->
+	<!-- <dispatcher>ERROR</dispatcher> -->
+	<!-- </filter-mapping> -->
+
+
+
+	<!-- <listener> -->
+	<!-- <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class> -->
+	<!-- </listener> -->
+	<!-- <context-param> -->
+	<!-- <param-name>shiroEnvironmentClass</param-name> -->
+	<!-- <param-value>org.apache.shiro.web.env.IniWebEnvironment</param-value> -->
+	<!-- </context-param> -->
+	<!-- <context-param> -->
+	<!-- <param-name>shiroConfigLocations</param-name> -->
+	<!-- <param-value>classpath:com/bug/config/shiro.ini</param-value> -->
+	<!-- </context-param> -->
+	<!-- Loads Spring Security config file -->
+	<!-- <context-param> -->
+	<!-- <param-name>contextConfigLocation</param-name> -->
+	<!-- <param-value> -->
+	<!-- classpath:com/bug/config/spring-security.xml -->
+	<!-- </param-value> -->
+	<!-- </context-param> -->
+
+	<!-- Spring Security -->
+<!-- 	<filter> -->
+<!-- 		<filter-name>shiroFilter</filter-name> -->
+<!-- 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> -->
+<!-- 		<init-param> -->
+<!-- 			<param-name>targetFilterLifecycle</param-name> -->
+<!-- 			<param-value>true</param-value> -->
+<!-- 		</init-param> -->
+<!-- 	</filter> -->
+
+<!-- 	<filter-mapping> -->
+<!-- 		<filter-name>shiroFilter</filter-name> -->
+<!-- 		<url-pattern>/*</url-pattern> -->
+<!-- 	</filter-mapping> -->
+</web-app>
