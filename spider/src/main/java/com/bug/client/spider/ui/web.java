@@ -55,7 +55,7 @@ public class web implements EntryPoint {
 		Defaults.setServiceRoot(GWT.getModuleBaseURL().replace("web", "rest"));
 		loginView = (MaterialLogin) clientFactory.getLoginView();
 
-		loginPresenter = new LoginPresenter(loginView, eventBus, clientFactory.getLoginResourceClient());
+		loginPresenter = new LoginPresenter(loginView, eventBus, clientFactory.getAuthenticationResource());
 		loginView.setLoginPresenter(loginPresenter);
 
 		loginPresenter.go(RootPanel.get());

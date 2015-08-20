@@ -80,9 +80,11 @@ public class MaterialLogin extends Composite implements LoginView {
 	}
 
 	@Override
-	public void getNotify() {
+	public String getNotify() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
+
+ 
 
 }

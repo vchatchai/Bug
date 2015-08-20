@@ -1,12 +1,14 @@
 package com.bug.client.hcm.webservice;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
 import org.fusesource.restygwt.client.MethodCallback;
 import org.fusesource.restygwt.client.RestService;
 
 import com.bug.client.common.anotation.SpringComponentResourceName;
+import com.bug.shared.authentication.AuthenticationToken;
 import com.bug.shared.hcm.Employee;
 
 @SpringComponentResourceName("authenticationResource")
@@ -14,7 +16,7 @@ import com.bug.shared.hcm.Employee;
 public interface AuthenticationResource extends RestService {
 
 	@Path("/login")
-	@GET
-	public void login(String email, String password, MethodCallback<Employee> callback);
+	@POST
+	public void login(AuthenticationToken authenticationToken, MethodCallback<Employee> callback);
 
 }

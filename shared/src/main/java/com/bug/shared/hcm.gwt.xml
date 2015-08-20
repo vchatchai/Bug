@@ -11,6 +11,7 @@
 
 	<!-- <source path="" > </source> -->
 	<source path="hcm" />
+	<source path="authentication" />
 	<!-- <source path="webservice/Test" /> -->
 	<!-- <source path="com.bug.client.common.webservice.Test" ></source> -->
 
