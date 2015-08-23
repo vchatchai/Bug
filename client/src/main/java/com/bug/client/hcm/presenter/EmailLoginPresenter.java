@@ -5,8 +5,8 @@ import org.fusesource.restygwt.client.MethodCallback;
 
 import com.bug.client.hcm.event.AppFreeEvent;
 import com.bug.client.hcm.event.AppFreeHandler;
+import com.bug.client.hcm.factory.LoginClientFactory;
 import com.bug.client.hcm.view.EmailLoginView;
-import com.bug.client.hcm.webservice.AuthenticationResource;
 import com.bug.shared.authentication.AuthenticationToken;
 import com.bug.shared.hcm.Employee;
 //import com.google.gwt.thirdparty.guava.common.eventbus.EventBus;
@@ -17,14 +17,13 @@ public class EmailLoginPresenter implements Presenter, EmailLoginView.LoginPrese
 
 	private EmailLoginView loginView;
 	private EventBus eventBus;
-	private AuthenticationResource loginResourceClient;
+	private LoginClientFactory loginResourceFactory;
 
-	public EmailLoginPresenter(EmailLoginView loginView, EventBus eventBus,
-			AuthenticationResource loginResourceClient) {
+	public EmailLoginPresenter(EmailLoginView loginView, EventBus eventBus, LoginClientFactory loginResourceFactory) {
 		super();
 		this.loginView = loginView;
 		this.eventBus = eventBus;
-		this.loginResourceClient = loginResourceClient;
+		this.loginResourceFactory = loginResourceFactory;
 
 		bind();
 	}
@@ -53,10 +52,10 @@ public class EmailLoginPresenter implements Presenter, EmailLoginView.LoginPrese
 		authenticationToken.setPassword(loginView.getPassword());
 
 		if (!loginView.getEmail().contains("@")) {
-			loginView.setNotify("No @ on email");
+			loginView.setNotify(loginResourceFactory.getAuthenticationMessages().errorAtSign(loginView.getEmail()));
 		}
 
-		loginResourceClient.login(authenticationToken, new MethodCallback<Employee>() {
+		loginResourceFactory.getAuthenticationResource().login(authenticationToken, new MethodCallback<Employee>() {
 
 			public void onSuccess(Method method, Employee response) {
 

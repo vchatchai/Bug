@@ -1,66 +1,60 @@
 package com.bug.framework.authentication.realm;
-//package com.bug.framework.authentication.config;
-//
-//import static com.google.common.collect.Lists.newArrayList;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.beans.factory.annotation.Qualifier;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.context.annotation.Scope;
-//import org.springframework.context.annotation.ScopedProxyMode;
-//import org.springframework.core.env.Environment;
-//import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
-//import org.springframework.security.oauth2.client.OAuth2RestTemplate;
-//import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
-//import org.springframework.security.oauth2.client.token.AccessTokenRequest;
-//import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
-//import org.springframework.security.oauth2.common.AuthenticationScheme;
-//import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
-//
-//import javax.annotation.Resource;
-//import java.util.Collections;
-//import java.util.List;
-//
-//@Configuration
-//@EnableOAuth2Client
-//class OAuth2SecurityConfiguration {
-//    @Autowired
-//    private Environment env;
-//
-//    @Resource
-//    @Qualifier("accessTokenRequest")
-//    private AccessTokenRequest accessTokenRequest;
-//
-//    @Bean
-//    @Scope("session")
-//    public OAuth2ProtectedResourceDetails googleResource() {
-//        AuthorizationCodeResourceDetails details = new AuthorizationCodeResourceDetails();
-//        details.setId("google-oauth-client");
-//        details.setClientId(env.getProperty("google.client.id"));
-//        details.setClientSecret(env.getProperty("google.client.secret"));
-//        details.setAccessTokenUri(env.getProperty("google.accessTokenUri"));
-//        details.setUserAuthorizationUri(env.getProperty("google.userAuthorizationUri"));
-//        details.setTokenName(env.getProperty("google.authorization.code"));
-//        String commaSeparatedScopes = env.getProperty("google.auth.scope");
-//        details.setScope(parseScopes(commaSeparatedScopes));
-//        details.setPreEstablishedRedirectUri(env.getProperty("google.preestablished.redirect.url"));
-//        details.setUseCurrentUri(false);
-//        details.setAuthenticationScheme(AuthenticationScheme.query);
-//        details.setClientAuthenticationScheme(AuthenticationScheme.form);
-//        return details;
-//    }
-//
-//    private List<String> parseScopes(String commaSeparatedScopes) {
-//        List<String> scopes = newArrayList();
-//        Collections.addAll(scopes, commaSeparatedScopes.split(","));
-//        return scopes;
-//    }
-//
-//    @Bean
-////    @Scope(value = "session", proxyMode = ScopedProxyMode.INTERFACES)
-//    public OAuth2RestTemplate googleRestTemplate() {
-//    	System.out.println("googleRestTemplate");
-//        return new OAuth2RestTemplate(googleResource(), new DefaultOAuth2ClientContext(accessTokenRequest));
-//    }
-//}
+
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.scribe.builder.ServiceBuilder;
+import org.scribe.builder.api.GoogleApi;
+import org.scribe.model.OAuthRequest;
+import org.scribe.model.Response;
+import org.scribe.model.Token;
+import org.scribe.model.Verb;
+import org.scribe.oauth.OAuthService;
+
+import com.bug.framework.authentication.bean.OAuth2AuthenticationToken;
+
+public class OAuth2SecurityRealm extends AuthorizingRealm {
+
+	@Override
+	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+		OAuthService service = new ServiceBuilder().provider(GoogleApi.class).apiKey("your_api_key")
+				.apiSecret("your_api_secret").build();
+				// Token requestToken = service.getRequestToken();
+				// String authUrl = service.getAuthorizationUrl(requestToken);
+
+		// OAuthRequest request = new OAuthRequest(Verb.GET,
+		// "http://api.twitter.com/1/account/verify_credentials.xml");
+		// service.signRequest(accessToken, request); // the access token from
+		// step 4
+		// Response response = request.send();
+		// System.out.println(response.getBody());
+		OAuth2AuthenticationToken oAuth = (OAuth2AuthenticationToken) token;
+
+		OAuthRequest request = new OAuthRequest(Verb.GET, (String) oAuth.getPrincipal());
+		service.signRequest((Token) token.getCredentials(), request); // the
+																		// access
+																		// token
+																		// from
+																		// step
+																		// 4
+		Response response = request.send();
+
+		return null;
+	}
+
+	@Override
+	public boolean supports(AuthenticationToken token) {
+		// TODO Auto-generated method stub
+		return token instanceof OAuth2AuthenticationToken;
+	}
+
+}

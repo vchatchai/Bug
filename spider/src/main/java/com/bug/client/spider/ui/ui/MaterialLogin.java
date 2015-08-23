@@ -1,5 +1,6 @@
 package com.bug.client.spider.ui.ui;
 
+import com.bug.client.hcm.presenter.AuthenticationMessages;
 import com.bug.client.hcm.view.EmailLoginView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -28,11 +29,22 @@ public class MaterialLogin extends Composite implements EmailLoginView {
 	MaterialTextBox email;
 	@UiField
 	MaterialButton btnLogin;
+	
+	AuthenticationMessages authenticationMessages  = GWT.create(AuthenticationMessages.class);
 
 	private LoginPresenter loginPresenter;
 
 	public MaterialLogin() {
 		initWidget(uiBinder.createAndBindUi(this));
+		setText();
+	}
+
+	private void setText() {
+
+		btnLogin.setText(authenticationMessages.loginLabel());
+		password.setPlaceholder(authenticationMessages.passwordLabel());
+		email.setPlaceholder(authenticationMessages.emailLabel());
+		
 	}
 
 	@UiHandler("btnLogin")
@@ -76,6 +88,7 @@ public class MaterialLogin extends Composite implements EmailLoginView {
 
 	@Override
 	public void setNotify(String notify) {
+		MaterialToast.alert("Login:" + authenticationMessages.loginLabel());
 		MaterialToast.alert("Login:" + notify);
 	}
 

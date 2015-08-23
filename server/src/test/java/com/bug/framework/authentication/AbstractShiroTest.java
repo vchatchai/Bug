@@ -1,4 +1,4 @@
-//package com.phoenix.framework.authentication;
+//package com.bug.framework.authentication;
 //
 //import org.apache.shiro.SecurityUtils;
 //import org.apache.shiro.UnavailableSecurityManagerException;
