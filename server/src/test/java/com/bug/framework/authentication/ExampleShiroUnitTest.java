@@ -1,4 +1,4 @@
-//package com.phoenix.framework.authentication;
+//package com.bug.framework.authentication;
 //
 //import static org.easymock.EasyMock.createNiceMock;
 //import static org.easymock.EasyMock.expect;

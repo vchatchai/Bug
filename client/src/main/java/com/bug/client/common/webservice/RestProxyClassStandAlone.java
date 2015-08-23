@@ -3,6 +3,7 @@ package com.bug.client.common.webservice;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.Objects;
 
 import org.fusesource.restygwt.client.MethodCallback;
 
@@ -32,16 +33,18 @@ public class RestProxyClassStandAlone implements InvocationHandler {
 		InvocationHandler handler = Proxy.getInvocationHandler(proxy);
 		if (handler instanceof RestProxyClassStandAlone) {
 			RestProxyClassStandAlone restProxyClassStandAlone = (RestProxyClassStandAlone) handler;
-			synchronized (restProxyClassStandAlone.thread) {
-				try {
-					System.out.println("Wait");
-					restProxyClassStandAlone.thread.wait();
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				} finally {
+			if (!Objects.isNull(restProxyClassStandAlone.thread)) {
+				synchronized (restProxyClassStandAlone.thread) {
+					try {
+						System.out.println("Wait");
+						restProxyClassStandAlone.thread.wait();
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					} finally {
 
-					System.out.println("End Wait");
+						System.out.println("End Wait");
+					}
 				}
 			}
 		}
@@ -85,8 +88,6 @@ class ConnectionThread extends Thread {
 		} catch (Throwable e) {
 			methodCallback.onFailure(method, e);
 		}
-
-		
 
 	}
 

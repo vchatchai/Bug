@@ -1,4 +1,4 @@
-package com.phoenix;
+package com.bug;
 
 import java.util.HashMap;
 import java.util.Hashtable;

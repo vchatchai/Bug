@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
-import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
 
 import com.bug.config.Configuration;
@@ -12,7 +11,7 @@ import com.thinkaurelius.titan.core.TitanFactory;
 import com.thinkaurelius.titan.core.TitanGraph;
 import com.thinkaurelius.titan.core.TitanTransaction;
 import com.thinkaurelius.titan.core.TitanVertex;
-import com.thinkaurelius.titan.core.log.LogProcessorFramework;
+import com.thinkaurelius.titan.example.GraphOfTheGodsFactory;
 
 public class GraphStart {
 
@@ -34,25 +33,25 @@ public class GraphStart {
 		
 		
 		
-		
-		LogProcessorFramework logProcessorFramework = TitanFactory.openTransactionLog(titanGraph);
-		logProcessorFramework.addLogProcessor("test");
+//		
+//		LogProcessorFramework logProcessorFramework = TitanFactory.openTransactionLog(titanGraph);
+//		logProcessorFramework.addLogProcessor("test");
 
 		// TitanTransaction t = titanGraph.tx();
 
-		GraphTraversalSource g = titanGraph.traversal();
-		Vertex gt = g.V().has("name", "saturn").next();
+//		GraphTraversalSource g = titanGraph.traversal();
+//		Vertex gt = g.V().has("name", "saturn").next();
 		// VertexLabel vertexLabel = g.V
 
 	
 
-		// GraphOfTheGodsFactory.load(g);
+		 GraphOfTheGodsFactory.loadWithoutMixedIndex(titanGraph, true);
 
 		// saturn = g.V().has('name', 'saturn').next()
 
 		// VertexLabel vertexLabel = titanGraph.getVertexLabel("Chatchai");
 
-		 addVertex(titanTransaction);
+//		 addVertex(titanTransaction);
 
 //		VertexLabel vertexLabel = titanGraph.getVertexLabel("person");
 
@@ -62,7 +61,7 @@ public class GraphStart {
 
 //		Vertex vertex = titanTransaction.traversal().V().has("Name", "Chatchai").next();
 
-		listVertex(titanTransaction);
+		listVertex(titanGraph);
 		
 //		printVertex(vertex);
 
@@ -73,6 +72,8 @@ public class GraphStart {
 	}
 
 	private static TitanGraph getConnection() throws IOException, ConfigurationException {
+		 
+		
 		TitanGraph titanGraph = TitanFactory.open(Configuration.getTitanConfiguration());
 		return titanGraph;
 	}
@@ -81,18 +82,20 @@ public class GraphStart {
 
 		TitanVertex titanVertex = (TitanVertex) v;
 
-		System.out.println("########Vertex Value" + titanVertex.vertexLabel());
+		System.out.println("########Vertex Value: " + titanVertex.vertexLabel());
 
 		for (String key : titanVertex.keys()) {
 			System.out.print(key + " : ");
-//			System.out.println(v.value(key));
+			System.out.println(titanVertex.property(key));
 		}
 
-		System.out.println("#########Vertex Value" + titanVertex.vertexLabel());
+		System.out.println("#########Vertex Value: " + titanVertex.vertexLabel());
 	}
 
-	public static void listVertex(TitanTransaction titanTransaction) {
-		GraphTraversal<Vertex, Vertex> graphTraversal = titanTransaction.traversal().V().hasLabel("person").has("Age", "2");
+	public static void listVertex(TitanGraph titanTransaction) {
+//		GraphTraversal<Vertex, Vertex> graphTraversal = titanTransaction.traversal().V().hasLabel("person").has("Age", "2");
+		
+		GraphTraversal<Vertex, Vertex> graphTraversal = titanTransaction.traversal().V();
 		while (graphTraversal.hasNext()) {
 			printVertex(graphTraversal.next());
 		}

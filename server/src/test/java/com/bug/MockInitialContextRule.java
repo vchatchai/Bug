@@ -1,4 +1,4 @@
-package com.phoenix;
+package com.bug;
 
 import javax.naming.Context;
 

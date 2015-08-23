@@ -1,5 +1,6 @@
 package com.bug.client.spider.ui;
 
+import org.apache.cassandra.thrift.Cassandra.AsyncProcessor.login;
 import org.fusesource.restygwt.client.Defaults;
 
 import com.bug.client.hcm.factory.LoginClientFactory;
@@ -41,21 +42,23 @@ public class web implements EntryPoint {
 		// will
 		// immediately result in the callback being given the token to
 		// use.
-		Auth.get().login(req, new Callback<String, Throwable>() {
-			@Override
-			public void onSuccess(String token) {
-				MaterialToast.alert("Success");
-			}
-
-			@Override
-			public void onFailure(Throwable caught) {
-				MaterialToast.alert("onFailure");
-			}
-		});
+//		Auth.get().login(req, new Callback<String, Throwable>() {
+//			@Override
+//			public void onSuccess(String token) {
+//				MaterialToast.alert("Success");
+//			}
+//
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				MaterialToast.alert("onFailure");
+//			}
+//		});
 		Defaults.setServiceRoot(GWT.getModuleBaseURL().replace("web", "rest"));
 		loginView = (MaterialLogin) clientFactory.getLoginView();
+		
+		
 
-		loginPresenter = new EmailLoginPresenter(loginView, eventBus, clientFactory.getAuthenticationResource());
+		loginPresenter = new EmailLoginPresenter(loginView, eventBus, clientFactory);
 		loginView.setLoginPresenter(loginPresenter);
 
 		loginPresenter.go(RootPanel.get());
