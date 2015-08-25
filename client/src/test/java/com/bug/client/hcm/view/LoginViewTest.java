@@ -117,8 +117,7 @@ public class LoginViewTest {
 
 		System.out.println("loginViewTest.getNotify:" + loginViewTest.getNotify());
 
-		assertEquals(loginViewTest.getNotify(), loginViewTest.getNotify(),
-				authenticationMessages.errorEmailEmpty());
+		assertEquals(loginViewTest.getNotify(), loginViewTest.getNotify(), authenticationMessages.errorEmailEmpty());
 		assertNotNull(loginViewTest.getNotify());
 
 	}

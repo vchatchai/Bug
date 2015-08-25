@@ -75,13 +75,17 @@ class ConnectionThread extends Thread {
 		for (Method meth : methods) {
 			if (meth.getName().equals(m.getName())) {
 				componentResourceMethod = meth;
+				break;
 			}
 		}
 
 		MethodCallback methodCallback = (MethodCallback) args[args.length - 1];
-
-		Object[] objects = java.util.Arrays.copyOfRange(args, 0, args.length - 1);
-
+		Object[] objects = null;
+		if (Objects.isNull(args) || args.length == 0) {
+			objects = new Object[0];
+		} else {
+			objects = java.util.Arrays.copyOfRange(args, 0, args.length - 1);
+		}
 		try {
 			Object result = componentResourceMethod.invoke(componentResource, objects);
 			methodCallback.onSuccess(method, result);

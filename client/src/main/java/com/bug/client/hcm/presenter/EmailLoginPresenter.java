@@ -64,6 +64,8 @@ public class EmailLoginPresenter implements Presenter, EmailLoginView.LoginPrese
 
 				public void onSuccess(Method method, Employee response) {
 
+					loginView.setNotify(authenticationMessages.errorUserPasswordFail() + response.getName());
+
 				}
 
 				public void onFailure(Method method, Throwable exception) {
@@ -71,6 +73,21 @@ public class EmailLoginPresenter implements Presenter, EmailLoginView.LoginPrese
 
 				}
 			});
+			// loginResourceFactory.getAuthenticationResource().login(authenticationToken,
+			// new MethodCallback<Void>() {
+			//
+			// public void onSuccess(Method method, Void response) {
+			// // TODO Auto-generated method stub
+			// loginView.setNotify(authenticationMessages.errorUserPasswordFail()
+			// );
+			// }
+			//
+			// public void onFailure(Method method, Throwable exception) {
+			// // TODO Auto-generated method stub
+			// loginView.setNotify(authenticationMessages.errorUserPasswordFail()
+			// + exception.getMessage());
+			// }
+			// });
 		}
 
 		eventBus.fireEvent(new AppFreeEvent());

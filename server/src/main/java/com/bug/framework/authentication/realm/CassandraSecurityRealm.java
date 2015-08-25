@@ -12,13 +12,21 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.Permission;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.authz.permission.WildcardPermission;
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.bug.framework.authentication.dao.AuthenticationDao;
 
 public class CassandraSecurityRealm extends AuthorizingRealm {
 
-	// @Autowired
-	// private UserManager userManager;
+//	@Autowired
+	AuthenticationDao authenticationDao;
+
+	public CassandraSecurityRealm(AuthenticationDao authenticationDao) { 
+		this.authenticationDao = authenticationDao;
+	}
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {

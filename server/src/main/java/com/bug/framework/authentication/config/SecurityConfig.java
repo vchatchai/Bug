@@ -21,6 +21,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
 import com.bug.AppMain;
+import com.bug.framework.authentication.dao.AuthenticationDao;
+import com.bug.framework.authentication.dao.impl.AuthenticationDaoImpl;
 import com.bug.framework.authentication.realm.CassandraSecurityRealm;
 
 @Configuration
@@ -30,8 +32,14 @@ public class SecurityConfig {
 	SecurityManager securityManager;
 
 	@Bean
+	public AuthenticationDao getAuthenticationDao() {
+		return (AuthenticationDao) new AuthenticationDaoImpl();
+
+	}
+
+	@Bean
 	public CassandraSecurityRealm customSecurityRealm() {
-		return new CassandraSecurityRealm();
+		return new CassandraSecurityRealm(getAuthenticationDao());
 	}
 	//
 	// @Bean
