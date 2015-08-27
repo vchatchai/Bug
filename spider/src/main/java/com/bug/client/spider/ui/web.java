@@ -5,13 +5,13 @@ import org.fusesource.restygwt.client.Defaults;
 import com.bug.client.hcm.factory.LoginClientFactory;
 import com.bug.client.hcm.presenter.EmailLoginPresenter;
 import com.bug.client.spider.ui.ui.MaterialLogin;
+import com.bug.client.spider.ui.ui.RegisterView;
 import com.google.api.gwt.oauth2.client.Auth;
 import com.google.api.gwt.oauth2.client.AuthRequest;
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
 
@@ -58,7 +58,10 @@ public class web implements EntryPoint {
 		loginPresenter = new EmailLoginPresenter(loginView, eventBus, clientFactory.getAuthenticationResource());
 		loginView.setLoginPresenter(loginPresenter);
 
-		loginPresenter.go(RootPanel.get());
+//		loginPresenter.go(RootPanel.get());
+		RegisterView registerView = new RegisterView();
+		RootPanel.get().add(registerView);
+		
 	}
 
 	private static final String GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/auth";

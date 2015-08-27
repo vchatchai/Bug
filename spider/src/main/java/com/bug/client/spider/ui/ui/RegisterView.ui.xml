@@ -1,0 +1,28 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:m="urn:import:gwt.material.design.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	
+	<g:HTMLPanel>
+	
+		<m:MaterialPanel padding="15"  shadow="2" addStyleNames="valign-wrapper">
+			
+			
+			
+			<m:MaterialPanel>
+				<m:MaterialLabel fontSize="2" text="REGISTER"/>
+				<m:MaterialTextBox placeholder="Email" icon="mdi-communication-email" ui:field="emailTextBox"/>
+				<m:MaterialTextBox placeholder="User Name" icon="mdi-action-account-circle" ui:field="userNameTextBox"/>
+				<m:MaterialTextBox placeholder="Password" icon="mdi-action-verified-user"  type="password" ui:field="passwordTextBox"/>
+				<m:MaterialCheckBox text="I accept with terms and conditions" ui:field="acceptCheckBox"> </m:MaterialCheckBox>  
+				
+				<m:MaterialButton ui:field="registerButton">Register</m:MaterialButton>
+			</m:MaterialPanel>
+			
+		</m:MaterialPanel>
+		
+		
+	</g:HTMLPanel>
+</ui:UiBinder> 
