@@ -2,35 +2,32 @@ package com.bug.client.spider.ui.ui;
 
 import com.bug.client.hcm.presenter.AuthenticationMessages;
 import com.bug.client.hcm.view.EmailLoginView;
+import com.bug.client.hcm.view.OAuth2LoginView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.client.ui.MaterialButton;
 import gwt.material.design.client.ui.MaterialCheckBox;
-import gwt.material.design.client.ui.MaterialModal;
-import gwt.material.design.client.ui.MaterialModal.TYPE;
 import gwt.material.design.client.ui.MaterialTextBox;
 import gwt.material.design.client.ui.MaterialToast;
 
-public class MaterialLogin extends Composite implements EmailLoginView {
+public class OAuth2Login extends Composite implements OAuth2LoginView {
 
 	private static MaterialLoginUiBinder uiBinder = GWT.create(MaterialLoginUiBinder.class);
 
 	// private HelloClient helloClient = GWT.create(HelloClient.class);
 
-	interface MaterialLoginUiBinder extends UiBinder<Widget, MaterialLogin> {
+	interface MaterialLoginUiBinder extends UiBinder<Widget, OAuth2Login> {
 	}
 
-	@UiField
-	MaterialTextBox password;
-	@UiField
-	MaterialTextBox email;
+	private String key = "";
+
 	@UiField
 	MaterialButton btnLogin;
 	@UiField
@@ -40,7 +37,7 @@ public class MaterialLogin extends Composite implements EmailLoginView {
 
 	private LoginPresenter loginPresenter;
 
-	public MaterialLogin() {
+	public OAuth2Login() {
 		initWidget(uiBinder.createAndBindUi(this));
 		setText();
 	}
@@ -48,8 +45,6 @@ public class MaterialLogin extends Composite implements EmailLoginView {
 	private void setText() {
 
 		btnLogin.setText(authenticationMessages.loginLabel());
-		password.setPlaceholder(authenticationMessages.passwordLabel());
-		email.setPlaceholder(authenticationMessages.emailLabel());
 		checkBoxRemider.setText(authenticationMessages.getReminderLabel());
 	}
 
@@ -58,9 +53,7 @@ public class MaterialLogin extends Composite implements EmailLoginView {
 		// RootPanel.getBodyElement().addClassName("white");
 		// RootPanel.get().clear();
 
-		MaterialModal.showModal(true, new ModalContent());
-
-		// loginPresenter.login();
+		loginPresenter.getURLLogin();
 
 		// MaterialToast.alert("Success"+ email.getText());
 		// helloClient.createEmployee(new MethodCallback<Employee>() {
@@ -85,19 +78,8 @@ public class MaterialLogin extends Composite implements EmailLoginView {
 	}
 
 	@Override
-	public String getEmail() {
-		return email.getText();
-	}
-
-	@Override
-	public String getPassword() {
-		return password.getText();
-	}
-
-	@Override
 	public void setNotify(String notify) {
-		MaterialToast.alert("Login:" + authenticationMessages.loginLabel());
-		MaterialToast.alert("Login:" + notify);
+		MaterialToast.alert("Login:" + authenticationMessages.loginLabel() + " :" + notify);
 	}
 
 	@Override
@@ -107,9 +89,19 @@ public class MaterialLogin extends Composite implements EmailLoginView {
 	}
 
 	@Override
-	public void setEmail(String e) {
-		email.setText(e);
+	public void redirectLogin(String response) {
+		// Window.alert(response);
+		Window.Location.replace(response);
 
+	}
+
+	@Override
+	public String getTokenKey() {
+		return key;
+	}
+
+	public void setTokenKey(String key) {
+		this.key = key;
 	}
 
 }

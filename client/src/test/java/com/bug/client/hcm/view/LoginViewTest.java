@@ -41,9 +41,11 @@ public class LoginViewTest {
 	LoginClientFactory clientFactory = null;
 	EmailLoginPresenter loginPresenter = null;
 	AuthenticationMessages authenticationMessages = null;
-
+	
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		
 	}
 
 	@AfterClass
@@ -83,16 +85,29 @@ public class LoginViewTest {
 		doAnswer(new Answer<String>() {
 			public String answer(InvocationOnMock invocationOnMock) throws Throwable {
 				when(loginViewTest.getNotify()).thenReturn((String) invocationOnMock.getArguments()[0]);
+				System.out.println("testLoginByEmail loginViewTest.getNotify1: " + loginViewTest.getNotify());
+				assertNull(loginViewTest.getNotify());
 				return null;
 			}
 		}).when(loginViewTest).setNotify(anyString());
 
 		loginPresenter.login();
-		System.out.println("loginViewTest.getNotify:" + loginViewTest.getNotify());
+		// System.out.println("loginViewTest.getNotify12:" +
+		// loginViewTest.getNotify());
+		// System.out.println("loginViewTest.getNotify12:" +
+		// loginViewTest.getNotify());
+		// System.out.println("loginViewTest.getNotify12:" +
+		// loginViewTest.getNotify());
+		// System.out.println("loginViewTest.getNotify12:" +
+		// loginViewTest.getNotify());
 
-		assertNull(loginViewTest.getNotify());
+//		assertNull(loginViewTest.getNotify());
 
 	}
+	
+
+
+ 
 
 	// @Ignore
 	@Test
@@ -109,16 +124,18 @@ public class LoginViewTest {
 		doAnswer(new Answer<String>() {
 			public String answer(InvocationOnMock invocationOnMock) throws Throwable {
 				when(loginViewTest.getNotify()).thenReturn((String) invocationOnMock.getArguments()[0]);
+
+				assertEquals(loginViewTest.getNotify(), loginViewTest.getNotify(), authenticationMessages.errorEmailEmpty());
+				assertNotNull(loginViewTest.getNotify());
 				return null;
 			}
 		}).when(loginViewTest).setNotify(anyString());
 
 		loginPresenter.login();
 
-		System.out.println("loginViewTest.getNotify:" + loginViewTest.getNotify());
+		// System.out.println("loginViewTest.getNotify:" +
+		// loginViewTest.getNotify());
 
-		assertEquals(loginViewTest.getNotify(), loginViewTest.getNotify(), authenticationMessages.errorEmailEmpty());
-		assertNotNull(loginViewTest.getNotify());
 
 	}
 
@@ -137,17 +154,19 @@ public class LoginViewTest {
 		doAnswer(new Answer<String>() {
 			public String answer(InvocationOnMock invocationOnMock) throws Throwable {
 				when(loginViewTest.getNotify()).thenReturn((String) invocationOnMock.getArguments()[0]);
+				assertEquals(loginViewTest.getNotify(), loginViewTest.getNotify(),
+						authenticationMessages.errorAtSign(loginViewTest.getEmail()));
+				assertNotNull(loginViewTest.getNotify());
 				return null;
 			}
 		}).when(loginViewTest).setNotify(anyString());
 
 		loginPresenter.login();
 
-		System.out.println("loginViewTest.getNotify:" + loginViewTest.getNotify());
+		// System.out.println("loginViewTest.getNotify:" +
+		// loginViewTest.getNotify());
 
-		assertEquals(loginViewTest.getNotify(), loginViewTest.getNotify(),
-				authenticationMessages.errorAtSign(loginViewTest.getEmail()));
-		assertNotNull(loginViewTest.getNotify());
+
 
 	}
 

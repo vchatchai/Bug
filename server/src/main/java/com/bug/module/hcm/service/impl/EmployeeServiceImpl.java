@@ -23,7 +23,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public Employee getEmployee(String id) {
 
 		
-		Employee employee = employeeDao.getEmployee(id);
+		Employee employee = null ;// employeeDao.getEmployee(id);
 		
 		return  employee;
 	}

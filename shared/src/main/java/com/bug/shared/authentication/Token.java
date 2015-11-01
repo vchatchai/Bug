@@ -1,6 +1,8 @@
 package com.bug.shared.authentication;
 
-public class AuthenticationToken {
+public class Token {
+
+	private AuthenticationType type;
 	private String email;
 	private String password;
 
@@ -18,6 +20,14 @@ public class AuthenticationToken {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public AuthenticationType getType() {
+		return type;
+	}
+
+	public void setType(AuthenticationType type) {
+		this.type = type;
 	}
 
 }

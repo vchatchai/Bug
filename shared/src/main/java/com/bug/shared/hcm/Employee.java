@@ -1,14 +1,23 @@
 package com.bug.shared.hcm;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Table(name = "HUMAN")
 public class Employee {
 
+	@Id
+	@Column(name = "ID")
 	private String id;
 
+	@Column(name = "NAME")
 	private String name;
 
+	@Column(name = "SURNAME")
 	private String surname;
 
-	private Employee history;
+	// private Employee history;
 
 	/**
 	 * @return the id
@@ -75,12 +84,12 @@ public class Employee {
 		return true;
 	}
 
-	public Employee getHistory() {
-		return history;
-	}
-
-	public void setHistory(Employee history) {
-		this.history = history;
-	}
+	// public Employee getHistory() {
+	// return history;
+	// }
+	//
+	// public void setHistory(Employee history) {
+	// this.history = history;
+	// }
 
 }

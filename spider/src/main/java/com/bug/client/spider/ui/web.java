@@ -1,31 +1,26 @@
 package com.bug.client.spider.ui;
 
-import org.apache.cassandra.thrift.Cassandra.AsyncProcessor.login;
 import org.fusesource.restygwt.client.Defaults;
 
 import com.bug.client.hcm.factory.LoginClientFactory;
+import com.bug.client.hcm.factory.OAuth2LoginClientFactory;
 import com.bug.client.hcm.presenter.EmailLoginPresenter;
+import com.bug.client.hcm.presenter.OAuth2LoginPresenter;
 import com.bug.client.spider.ui.ui.MaterialLogin;
-import com.google.api.gwt.oauth2.client.Auth;
+import com.bug.client.spider.ui.ui.OAuth2Login;
 import com.google.api.gwt.oauth2.client.AuthRequest;
-import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
-
-import gwt.material.design.client.ui.MaterialToast;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class web implements EntryPoint {
 
-	private LoginClientFactory clientFactory = new ClientFactoryImpl();
-	private MaterialLogin loginView = null;
-	private EmailLoginPresenter loginPresenter = null;
 	EventBus eventBus = new SimpleEventBus();
 
 	/**
@@ -42,21 +37,46 @@ public class web implements EntryPoint {
 		// will
 		// immediately result in the callback being given the token to
 		// use.
-//		Auth.get().login(req, new Callback<String, Throwable>() {
-//			@Override
-//			public void onSuccess(String token) {
-//				MaterialToast.alert("Success");
-//			}
-//
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				MaterialToast.alert("onFailure");
-//			}
-//		});
+		// Auth.get().login(req, new Callback<String, Throwable>() {
+		// @Override
+		// public void onSuccess(String token) {
+		// MaterialToast.alert("Success");
+		// }
+		//
+		// @Override
+		// public void onFailure(Throwable caught) {
+		// MaterialToast.alert("onFailure");
+		// }
+		// });
 		Defaults.setServiceRoot(GWT.getModuleBaseURL().replace("web", "rest"));
+
+		 emailLogin();
+//		oauth2Login();
+	}
+
+	private void oauth2Login() {
+
+		String code = Window.Location.getParameter("code");
+
+		OAuth2LoginClientFactory loginResourceFactory = new OAuth2LoginClientFactoryImpl();
+		OAuth2Login auth2Login = (OAuth2Login) loginResourceFactory.getLoginView();
+		if (code != null) {
+			Window.alert(code);
+			
+//			auth2Login.se
+			
+		}
+		OAuth2LoginPresenter auth2LoginPresenter = new OAuth2LoginPresenter(auth2Login, eventBus, loginResourceFactory);
+		auth2Login.setLoginPresenter(auth2LoginPresenter);
+
+		auth2LoginPresenter.go(RootPanel.get());
+	}
+
+	public void emailLogin() {
+		LoginClientFactory clientFactory = new ClientFactoryImpl();
+		MaterialLogin loginView = null;
 		loginView = (MaterialLogin) clientFactory.getLoginView();
-		
-		
+		EmailLoginPresenter loginPresenter = null;
 
 		loginPresenter = new EmailLoginPresenter(loginView, eventBus, clientFactory);
 		loginView.setLoginPresenter(loginPresenter);

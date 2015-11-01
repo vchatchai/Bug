@@ -21,9 +21,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
 import com.bug.AppMain;
+import com.bug.framework.authentication.bean.OAuth2AuthenticationToken;
 import com.bug.framework.authentication.dao.AuthenticationDao;
 import com.bug.framework.authentication.dao.impl.AuthenticationDaoImpl;
 import com.bug.framework.authentication.realm.CassandraSecurityRealm;
+import com.bug.framework.authentication.realm.OAuth2SecurityRealm;
 
 @Configuration
 public class SecurityConfig {
@@ -40,6 +42,11 @@ public class SecurityConfig {
 	@Bean
 	public CassandraSecurityRealm customSecurityRealm() {
 		return new CassandraSecurityRealm(getAuthenticationDao());
+	}
+
+	@Bean
+	public OAuth2SecurityRealm oauth2SecurityRealm() {
+		return new OAuth2SecurityRealm();
 	}
 	//
 	// @Bean
@@ -66,6 +73,8 @@ public class SecurityConfig {
 		}
 
 		securityManager.setRealm(customSecurityRealm());
+		securityManager.getRealms().add(oauth2SecurityRealm());
+	
 		//
 		//
 		// Factory<org.apache.shiro.mgt.SecurityManager> factory = new
@@ -111,16 +120,16 @@ public class SecurityConfig {
 		return authorizationAttributeSourceAdvisor;
 	}
 
-	@Bean
-	public ShiroFilterFactoryBean shiroFilter() {
-		ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
-		Map<String, String> definitionsMap = new HashMap<String, String>();
-		definitionsMap.put("/rest/**", "authc");
-		shiroFilter.setFilterChainDefinitionMap(definitionsMap);
-		// shiroFilter.setLoginUrl("/signin");
-		// shiroFilter.setUnauthorizedUrl("/index");
-		shiroFilter.setSecurityManager(securityManager);
-
-		return shiroFilter;
-	}
+//	@Bean
+//	public ShiroFilterFactoryBean shiroFilter() {
+//		ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
+//		Map<String, String> definitionsMap = new HashMap<String, String>();
+//		definitionsMap.put("/rest/**", "authc");
+//		shiroFilter.setFilterChainDefinitionMap(definitionsMap);
+//		// shiroFilter.setLoginUrl("/signin");
+//		// shiroFilter.setUnauthorizedUrl("/index");
+//		shiroFilter.setSecurityManager(securityManager);
+//
+//		return shiroFilter;
+//	}
 }

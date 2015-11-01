@@ -7,7 +7,8 @@ import com.bug.client.hcm.event.AppFreeEvent;
 import com.bug.client.hcm.event.AppFreeHandler;
 import com.bug.client.hcm.factory.LoginClientFactory;
 import com.bug.client.hcm.view.EmailLoginView;
-import com.bug.shared.authentication.AuthenticationToken;
+import com.bug.shared.authentication.AuthenticationType;
+import com.bug.shared.authentication.Token;
 import com.bug.shared.hcm.Employee;
 //import com.google.gwt.thirdparty.guava.common.eventbus.EventBus;
 import com.google.gwt.user.client.ui.HasWidgets;
@@ -47,7 +48,8 @@ public class EmailLoginPresenter implements Presenter, EmailLoginView.LoginPrese
 
 	public void login() {
 
-		AuthenticationToken authenticationToken = new AuthenticationToken();
+		Token authenticationToken = new Token();
+		authenticationToken.setType(AuthenticationType.SIMPLE);
 		authenticationToken.setEmail(loginView.getEmail());
 		authenticationToken.setPassword(loginView.getPassword());
 
@@ -64,30 +66,16 @@ public class EmailLoginPresenter implements Presenter, EmailLoginView.LoginPrese
 
 				public void onSuccess(Method method, Employee response) {
 
-					loginView.setNotify(authenticationMessages.errorUserPasswordFail() + response.getName());
+					loginView.setNotify(null);
 
 				}
 
 				public void onFailure(Method method, Throwable exception) {
-					loginView.setNotify(authenticationMessages.errorUserPasswordFail() + exception.getMessage());
+					loginView.setNotify(authenticationMessages.errorUserPasswordFail());
 
 				}
 			});
-			// loginResourceFactory.getAuthenticationResource().login(authenticationToken,
-			// new MethodCallback<Void>() {
-			//
-			// public void onSuccess(Method method, Void response) {
-			// // TODO Auto-generated method stub
-			// loginView.setNotify(authenticationMessages.errorUserPasswordFail()
-			// );
-			// }
-			//
-			// public void onFailure(Method method, Throwable exception) {
-			// // TODO Auto-generated method stub
-			// loginView.setNotify(authenticationMessages.errorUserPasswordFail()
-			// + exception.getMessage());
-			// }
-			// });
+
 		}
 
 		eventBus.fireEvent(new AppFreeEvent());
