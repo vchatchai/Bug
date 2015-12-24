@@ -6,8 +6,10 @@ import com.bug.client.hcm.factory.LoginClientFactory;
 import com.bug.client.hcm.factory.OAuth2LoginClientFactory;
 import com.bug.client.hcm.presenter.EmailLoginPresenter;
 import com.bug.client.hcm.presenter.OAuth2LoginPresenter;
+import com.bug.client.spider.ui.ui.HomePanel;
 import com.bug.client.spider.ui.ui.MaterialLogin;
 import com.bug.client.spider.ui.ui.OAuth2Login;
+import com.bug.client.spider.ui.ui.Register;
 import com.google.api.gwt.oauth2.client.AuthRequest;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -50,7 +52,9 @@ public class web implements EntryPoint {
 		// });
 		Defaults.setServiceRoot(GWT.getModuleBaseURL().replace("web", "rest"));
 
-		 emailLogin();
+		home();
+//		register();
+//		 emailLogin();
 //		oauth2Login();
 	}
 
@@ -71,7 +75,39 @@ public class web implements EntryPoint {
 
 		auth2LoginPresenter.go(RootPanel.get());
 	}
+	public void register() {
+//		LoginClientFactory clientFactory = new ClientFactoryImpl();
+//		MaterialLogin loginView = null;
+//		loginView = (MaterialLogin) clientFactory.getLoginView();
+//		EmailLoginPresenter loginPresenter = null;
+//
+//		loginPresenter = new EmailLoginPresenter(loginView, eventBus, clientFactory);
+//		loginView.setLoginPresenter(loginPresenter);
+//
+//		loginPresenter.go(RootPanel.get());
+		
+		RootPanel.get().add(new Register());
+		
+		
+	}
 
+	public void home() {
+//		LoginClientFactory clientFactory = new ClientFactoryImpl();
+//		MaterialLogin loginView = null;
+//		loginView = (MaterialLogin) clientFactory.getLoginView();
+//		EmailLoginPresenter loginPresenter = null;
+//
+//		loginPresenter = new EmailLoginPresenter(loginView, eventBus, clientFactory);
+//		loginView.setLoginPresenter(loginPresenter);
+//
+//		loginPresenter.go(RootPanel.get());
+
+		RootPanel.get().add(new HomePanel()); 
+		
+		
+	}
+	
+	
 	public void emailLogin() {
 		LoginClientFactory clientFactory = new ClientFactoryImpl();
 		MaterialLogin loginView = null;
