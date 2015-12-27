@@ -17,11 +17,11 @@
 
 		<m:MaterialNavBar wave="light" align="right" color="blue"
 			text="" sideBar="fixed" sideBarWidth="300">
-			<m:nav>
-				<!-- <m:MaterialSearch /> -->
-				<!-- <m:MaterialPreLoader size="BIG"> -->
-				<!-- <m:MaterialSpinner color="blue-only" /> -->
-				<!-- </m:MaterialPreLoader> -->
+<!-- 			<m:nav>
+				<m:MaterialSearch />
+				<m:MaterialPreLoader size="BIG">
+				<m:MaterialSpinner color="blue-only" />
+				</m:MaterialPreLoader>
 			</m:nav>
 			<m:nav>
 				<m:MaterialLink icon="mdi-social-whatshot" textColor="white"
@@ -33,8 +33,8 @@
 			</m:nav>
 			<m:nav>
 				<m:MaterialLink icon="mdi-social-notifications"
-					textColor="white" tooltip="Notification" />
-			</m:nav>
+					textColor="white" tooltip="Notification" /> 
+			</m:nav>-->
 <!-- 			<m:sidebaritem> -->
 <!-- 				profileImageUrl="http://b.vimeocdn.com/ps/339/488/3394886_300.jpg" -->
 <!-- 				<m:MaterialTopNav profileName="GTO" -->
@@ -64,7 +64,8 @@
 			</m:sidebaritem>
 			<m:sidebaritem>
 				<m:MaterialLink icon="mdi-action-explore"
-					iconPosition="left" text="Navigation" textColor="blue" />
+					iconPosition="left" text="รายชื่อผู้อบรม" ui:field="traineePage"
+					textColor="blue" />
 			</m:sidebaritem>
 			<m:sidebaritem>
 				<m:MaterialLink icon="mdi-action-grade" iconPosition="left"
@@ -187,7 +188,7 @@
 			<!-- </m:MaterialCollapsible> -->
 		</m:MaterialContainer>
 
-		<m:MaterialFloatingContainer>
+<!-- 		<m:MaterialFloatingContainer>
 			<m:initial>
 				<m:MaterialButton type="floating" waves="light"
 					size="large" color="red" icon="mdi-content-add" tooltip="Create"
@@ -203,7 +204,7 @@
 					color="blue" icon="mdi-image-palette" tooltip="Theme"
 					tooltipLocation="left" />
 			</m:item>
-		</m:MaterialFloatingContainer>
+		</m:MaterialFloatingContainer> -->
 
 		<m:MaterialFooter color="blue"
 			copyright="© 2015 Copyright GWT Material" type="fixed">

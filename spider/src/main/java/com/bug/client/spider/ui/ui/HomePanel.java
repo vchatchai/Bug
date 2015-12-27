@@ -48,9 +48,10 @@ public class HomePanel extends Composite {
 		
 		
 //		registerPage.setText("Chatchai");
-		setHomePage();
+//		setHomePage();
+		setTrainee();
 	}
-	
+ 
 //..loginPage
 	
 	@UiHandler("loginPage")
@@ -74,13 +75,30 @@ public class HomePanel extends Composite {
 		setProgramPage();
 	}
 
+	@UiHandler("traineePage")
+	void traineePage(ClickEvent e) {
+		setTraineePage();
+	}
+	
+
+	private void setTraineePage() {
+		
+		materialContainer.clear();
+		materialContainer.add(new MaterialDataGrid());
+		
+	}
+	
 	private void setLoginPage() {
 		
 		materialContainer.clear();
 		materialContainer.add(new MaterialLogin());
 		
 	}
-	
+
+	private void setTrainee(){
+		materialContainer.clear();
+		materialContainer.add(new MaterialDataGrid());
+	}
 	
 	
 	private void setProgramPage(){
