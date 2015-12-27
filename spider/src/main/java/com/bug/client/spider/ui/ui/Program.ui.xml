@@ -1,0 +1,133 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:m="urn:import:gwt.material.design.client.ui">
+	<ui:style>
+		.label {
+		margin-left: 5%;
+		margin-top: 5%
+		}
+
+		header, main, footer {
+		padding-left: 300px;
+		}
+	</ui:style>
+	<g:HTMLPanel>
+
+
+		<m:MaterialLink text="รายการเปิดอบรม" textColor="grey"
+			addStyleNames="{style.label}" />
+		<m:MaterialCollapsible type="popout" ui:field="popout">
+			<m:item>
+				<m:MaterialCollapsibleItem>
+					<m:header>
+						<m:MaterialLink text="Accounting 101" icon="mdi-maps-flight"
+							textColor="purple" />
+					</m:header>
+					<m:content>
+
+						<m:MaterialRow>
+							<m:MaterialLabel
+								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
+
+							<br />
+							<m:MaterialButton text="ลงทะเบียน" ui:field="register"></m:MaterialButton>
+						</m:MaterialRow>
+
+					</m:content>
+				</m:MaterialCollapsibleItem>
+			</m:item>
+			<m:item>
+				<m:MaterialCollapsibleItem>
+					<m:header>
+						<!-- addStyleNames="active" -->
+						<m:MaterialLink
+							text="Core Xamarin for Android Programming with C# .NET " icon="mdi-social-people"
+							textColor="red" />
+					</m:header>
+					<m:content>
+						<m:MaterialPanel>
+							<m:MaterialRow>
+								<m:MaterialImage
+									url="http://www.codemobiles.com/biz/images/xamarin_android_banner.jpg?dummy=10"></m:MaterialImage>
+								<m:MaterialLabel
+									text="เปิดรอบวันที่ 23-25 ก.พ. 2559 กับหลักสูตร Core Xamarin for Android Programming with C# .NET เขียนโปรแกรมบนมือถือ Android ด้วย Xamarin เน้นเนื้อหาเข้มข้น นำไปใช้งานได้จริง สอนตั้งแต่เริ่มต้น จนถึงการนำแอพขึ้น GooglePlay
+สนใจดูรายละเอียดหลักสูตรเพิ่มเติมได้ที่ http://www.codemobiles.com/biz/training/xamarin.php
+หรือ ติดต่อ 081-359-9468 / 087-676-0813  " />
+								<br />
+								<m:MaterialButton text="ลงทะเบียน" ui:field="register1"></m:MaterialButton>
+							</m:MaterialRow>
+						</m:MaterialPanel>
+					</m:content>
+				</m:MaterialCollapsibleItem>
+			</m:item>
+			<m:item>
+				<m:MaterialCollapsibleItem>
+					<m:header>
+						<m:MaterialLink text="ภาษีมรดก" icon="mdi-content-flag"
+							textColor="orange" />
+					</m:header>
+					<m:content>
+						<m:MaterialRow>
+							<m:MaterialLabel
+								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
+							<br />
+							<m:MaterialButton text="ลงทะเบียน" ui:field="register2"></m:MaterialButton>
+						</m:MaterialRow>
+					</m:content>
+				</m:MaterialCollapsibleItem>
+			</m:item>
+			<m:item>
+				<m:MaterialCollapsibleItem>
+					<m:header>
+						<m:MaterialLink text="บัญชีภาษีเบื้องต้น" icon="mdi-action-shopping-cart"
+							textColor="brown" />
+					</m:header>
+					<m:content>
+						<m:MaterialRow>
+							<m:MaterialLabel
+								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
+							<br />
+							<m:MaterialButton text="ลงทะเบียน" ui:field="register3"></m:MaterialButton>
+						</m:MaterialRow>
+					</m:content>
+				</m:MaterialCollapsibleItem>
+			</m:item>
+			<m:item>
+				<m:MaterialCollapsibleItem>
+					<m:header>
+						<m:MaterialLink text="ภาษีที่ดิน" icon="mdi-image-style"
+							textColor="blue" />
+					</m:header>
+					<m:content>
+						<m:MaterialRow>
+							<m:MaterialLabel
+								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
+
+							<br />
+							<m:MaterialButton text="ลงทะเบียน" ui:field="register4"></m:MaterialButton>
+						</m:MaterialRow>
+					</m:content>
+				</m:MaterialCollapsibleItem>
+			</m:item>
+			<m:item>
+				<m:MaterialCollapsibleItem>
+					<m:header>
+						<m:MaterialLink text="ภาษีบุคคลธรรมดา" icon="mdi-editor-insert-chart"
+							textColor="green" />
+					</m:header>
+					<m:content>
+						<m:MaterialRow>
+							<m:MaterialLabel
+								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
+
+							<br />
+							<m:MaterialButton text="ลงทะเบียน" ui:field="register5"> </m:MaterialButton>
+						</m:MaterialRow>
+					</m:content>
+				</m:MaterialCollapsibleItem>
+			</m:item>
+		</m:MaterialCollapsible>
+
+
+	</g:HTMLPanel>
+</ui:UiBinder> 

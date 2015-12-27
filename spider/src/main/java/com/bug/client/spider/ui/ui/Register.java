@@ -1,20 +1,11 @@
 package com.bug.client.spider.ui.ui;
 
-import gwt.material.design.client.ui.MaterialCheckBox;
-import gwt.material.design.client.ui.MaterialLabel;
-import gwt.material.design.client.ui.MaterialListBox;
-import gwt.material.design.client.ui.MaterialRange;
-import gwt.material.design.client.ui.MaterialSwitch;
-import gwt.material.design.client.ui.MaterialToast;
-
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+
+import gwt.material.design.client.ui.MaterialContainer;
 
 public class Register extends Composite {
 
@@ -24,10 +15,13 @@ public class Register extends Composite {
 	interface RegisterUiBinder extends UiBinder<Widget, Register> {
 	}
 
-	@UiField
-	MaterialListBox lstOptions;
-	@UiField
-	MaterialCheckBox cbBoxAll, cbBox, cbBlue, cbRed, cbCyan, cbGreen, cbBrown;
+	
+	
+//	@UiField
+//	MaterialListBox lstOptions; 
+//	
+//	@UiField
+//	MaterialCheckBox cbBoxAll, cbBox, cbBlue, cbRed, cbCyan, cbGreen, cbBrown;
 
 //	@UiField
 //	MaterialSwitch switch1, switch2;
@@ -36,40 +30,41 @@ public class Register extends Composite {
 //	@UiField
 //	MaterialRange range;
 
-	public Register() {
+	public Register(MaterialContainer materialContainer) {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
-	@UiHandler("lstOptions")
-	void onChangeListBox(ChangeEvent e) {
-		MaterialToast.alert("Selected Index: " + lstOptions.getSelectedIndex());
-	}
-
-	@UiHandler("cbBox")
-	void onCheckBox(ClickEvent e) {
-		if (cbBox.getValue()) {
-			cbBox.setText("CheckBox 1: true");
-		} else {
-			cbBox.setText("CheckBox 1: false");
-		}
-	}
-
-	@UiHandler("cbBoxAll")
-	void onCheckAll(ClickEvent e) {
-		if (cbBoxAll.getValue()) {
-			cbBlue.setValue(true);
-			cbRed.setValue(true);
-			cbCyan.setValue(true);
-			cbGreen.setValue(true);
-			cbBrown.setValue(true);
-		} else {
-			cbBlue.setValue(false);
-			cbRed.setValue(false);
-			cbCyan.setValue(false);
-			cbGreen.setValue(false);
-			cbBrown.setValue(false);
-		}
-	}
+//	@UiHandler("lstOptions")
+//	void onChangeListBox(ChangeEvent e) {
+//		MaterialToast.alert("Selected Index: " + lstOptions.getSelectedIndex());
+//	}
+//
+//	@UiHandler("cbBox")
+//	void onCheckBox(ClickEvent e) {
+//		if (cbBox.getValue()) {
+//			cbBox.setText("CheckBox 1: true");
+//		} else {
+//			cbBox.setText("CheckBox 1: false");
+//		}
+//	}
+//	 
+//
+//	@UiHandler("cbBoxAll")
+//	void onCheckAll(ClickEvent e) {
+//		if (cbBoxAll.getValue()) {
+//			cbBlue.setValue(true);
+//			cbRed.setValue(true);
+//			cbCyan.setValue(true);
+//			cbGreen.setValue(true);
+//			cbBrown.setValue(true);
+//		} else {
+//			cbBlue.setValue(false);
+//			cbRed.setValue(false);
+//			cbCyan.setValue(false);
+//			cbGreen.setValue(false);
+//			cbBrown.setValue(false);
+//		}
+//	}
 
 //	@UiHandler("switch1")
 //	void onSwitch1(ClickEvent e) {

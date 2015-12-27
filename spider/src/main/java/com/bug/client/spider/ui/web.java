@@ -86,7 +86,7 @@ public class web implements EntryPoint {
 //
 //		loginPresenter.go(RootPanel.get());
 		
-		RootPanel.get().add(new Register());
+//		RootPanel.get().add(new Register());
 		
 		
 	}

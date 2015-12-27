@@ -2,20 +2,26 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:m="urn:import:gwt.material.design.client.ui">
 	<ui:style>
-	.label {
+		.label {
 		margin-left: 5%;
 		margin-top: 5%
-	}
-	
-	header, main, footer {
+		}
+
+		header, main, footer {
 		padding-left: 300px;
-	}
+		}
 	</ui:style>
 	<g:HTMLPanel>
+		<!-- <m:MaterialNavBar wave="light" align="right" color="blue" -->
+		<!-- text="" sideBar="fixed" sideBarWidth="300"> -->
+
 		<m:MaterialNavBar wave="light" align="right" color="blue"
-			text="Starter" sideBar="fixed" sideBarWidth="300">
+			text="" sideBar="fixed" sideBarWidth="300">
 			<m:nav>
-				<m:MaterialSearch />
+				<!-- <m:MaterialSearch /> -->
+				<!-- <m:MaterialPreLoader size="BIG"> -->
+				<!-- <m:MaterialSpinner color="blue-only" /> -->
+				<!-- </m:MaterialPreLoader> -->
 			</m:nav>
 			<m:nav>
 				<m:MaterialLink icon="mdi-social-whatshot" textColor="white"
@@ -29,30 +35,32 @@
 				<m:MaterialLink icon="mdi-social-notifications"
 					textColor="white" tooltip="Notification" />
 			</m:nav>
-			<m:sidebaritem>
-				<m:MaterialTopNav profileName="GWT Material"
-					profileImageUrl="http://b.vimeocdn.com/ps/339/488/3394886_300.jpg"
-					url="http://2.bp.blogspot.com/-x4D3EPELYRU/VMHu52a4qUI/AAAAAAAAHek/EmnIgqTtu_U/s0/fon116%2B2160x1920.png"
-					ui:field="topNav" textColor="white" type="sidebar">
-					<m:child>
-						<m:MaterialLink text="gwt-material@gmail.com"
-							textColor="white" fontSize="0.8" icon="mdi-navigation-arrow-drop-down"
-							iconPosition="right" />
-					</m:child>
-				</m:MaterialTopNav>
-			</m:sidebaritem>
+<!-- 			<m:sidebaritem> -->
+<!-- 				profileImageUrl="http://b.vimeocdn.com/ps/339/488/3394886_300.jpg" -->
+<!-- 				<m:MaterialTopNav profileName="GTO" -->
+<!-- 					url="http://2.bp.blogspot.com/-x4D3EPELYRU/VMHu52a4qUI/AAAAAAAAHek/EmnIgqTtu_U/s0/fon116%2B2160x1920.png" -->
+<!-- 					ui:field="topNav" textColor="white" type="sidebar"> -->
+<!-- 					<m:child> -->
+<!-- 						text="gwt-material@gmail.com" -->
+<!-- 						icon="mdi-navigation-arrow-drop-down" -->
+<!-- 						<m:MaterialLink textColor="white" fontSize="0.8" -->
+<!-- 							iconPosition="right" /> -->
+<!-- 					</m:child> -->
+<!-- 				</m:MaterialTopNav> -->
+<!-- 			</m:sidebaritem> -->
 			<m:sidebaritem>
 				<m:MaterialLink icon="mdi-social-whatshot"
-					iconPosition="left" text="Starter" textColor="blue" />
+					iconPosition="left" text="หน้าแรก" ui:field="homePage" textColor="blue" />
 			</m:sidebaritem>
 			<m:sidebaritem>
 				<m:MaterialLink icon="mdi-navigation-apps"
-					iconPosition="left" text="Apps" textColor="blue" />
+					iconPosition="left" text="รายการเปิดอบรม" ui:field="programPage"
+					textColor="blue" />
 			</m:sidebaritem>
 			<m:sidebaritem>
 				<m:MaterialLink icon="mdi-social-notifications"
-					iconPosition="left" text="Notifications" textColor="blue"
-					separator="true" />
+					iconPosition="left" text="เข้าสู่ระบบ" ui:field="loginPage"
+					textColor="blue" separator="true" />
 			</m:sidebaritem>
 			<m:sidebaritem>
 				<m:MaterialLink icon="mdi-action-explore"
@@ -64,101 +72,119 @@
 			</m:sidebaritem>
 		</m:MaterialNavBar>
 
-		<m:MaterialContainer>
-			<m:MaterialLink text="รายการเปิดอบรม" textColor="grey"
-				addStyleNames="{style.label}" />
-			<m:MaterialCollapsible type="popout"  ui:field="popout" >
-				<m:item>
-					<m:MaterialCollapsibleItem>
-						<m:header>
-							<m:MaterialLink text="Accounting 101" icon="mdi-maps-flight"
-								textColor="purple" />
-						</m:header>
-						<m:content>
-						
-						<m:MaterialRow>
-									 	<m:MaterialLabel
-									text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
-							
-									<m:MaterialButton text="ลงทะเบียน" ></m:MaterialButton>
-						</m:MaterialRow>
-						
-						</m:content>
-					</m:MaterialCollapsibleItem>
-				</m:item>
-				<m:item>
-					<m:MaterialCollapsibleItem>
-						<m:header>
-							<m:MaterialLink addStyleNames="active" text="e-Filling"
-								icon="mdi-social-people" textColor="red" />
-						</m:header>
-						<m:content>
-							<m:MaterialPanel>
-								<m:MaterialLabel
-									text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
-								<m:MaterialRow>
-									<m:MaterialTextBox placeholder="CitizenID" />
-									<m:MaterialTextBox placeholder="AcountingID" />
-									<m:MaterialTextBox placeholder="First Name" />
-									<m:MaterialTextBox placeholder="Last Name" />
-									<m:MaterialTextBox placeholder="Email" />
-									<m:MaterialTextBox placeholder="Telephone" />
-									<m:MaterialButton text="Save" ></m:MaterialButton>
+		<m:MaterialContainer ui:field="materialContainer">
+			<!-- <m:MaterialLink text="รายการเปิดอบรม" textColor="grey" -->
+			<!-- addStyleNames="{style.label}" /> -->
+			<!-- <m:MaterialCollapsible type="popout" ui:field="popout"> -->
+			<!-- <m:item> -->
+			<!-- <m:MaterialCollapsibleItem> -->
+			<!-- <m:header> -->
+			<!-- <m:MaterialLink text="Accounting 101" icon="mdi-maps-flight" -->
+			<!-- textColor="purple" /> -->
+			<!-- </m:header> -->
+			<!-- <m:content> -->
 
-								</m:MaterialRow>
-							</m:MaterialPanel>
-						</m:content>
-					</m:MaterialCollapsibleItem>
-				</m:item>
-				<m:item>
-					<m:MaterialCollapsibleItem>
-						<m:header>
-							<m:MaterialLink text="ภาษีมรดก" icon="mdi-content-flag"
-								textColor="orange" />
-						</m:header>
-						<m:content>
-							<m:MaterialLabel
-								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
-						</m:content>
-					</m:MaterialCollapsibleItem>
-				</m:item>
-				<m:item>
-					<m:MaterialCollapsibleItem>
-						<m:header>
-							<m:MaterialLink text="บัญชีภาษีเบื้องต้น" icon="mdi-action-shopping-cart"
-								textColor="brown" />
-						</m:header>
-						<m:content>
-							<m:MaterialLabel
-								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
-						</m:content>
-					</m:MaterialCollapsibleItem>
-				</m:item>
-				<m:item>
-					<m:MaterialCollapsibleItem>
-						<m:header>
-							<m:MaterialLink text="ภาษีที่ดิน" icon="mdi-image-style"
-								textColor="blue" />
-						</m:header>
-						<m:content>
-							<m:MaterialLabel
-								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
-						</m:content>
-					</m:MaterialCollapsibleItem>
-				</m:item>
-				<m:item>
-					<m:MaterialCollapsibleItem>
-						<m:header>
-							<m:MaterialLink text="ภาษีบุคคลธรรมดา" icon="mdi-editor-insert-chart"
-								textColor="green" />
-						</m:header>
-						<m:content>
-							<m:MaterialLabel
-								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
-						</m:content>
-					</m:MaterialCollapsibleItem>
-				</m:item>
-			</m:MaterialCollapsible>
+			<!-- <m:MaterialRow> -->
+			<!-- <m:MaterialLabel -->
+			<!-- text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
+				do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
+				minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
+				ea commodo consequat." /> -->
+
+			<!-- <m:MaterialButton text="ลงทะเบียน"></m:MaterialButton> -->
+			<!-- </m:MaterialRow> -->
+
+			<!-- </m:content> -->
+			<!-- </m:MaterialCollapsibleItem> -->
+			<!-- </m:item> -->
+			<!-- <m:item> -->
+			<!-- <m:MaterialCollapsibleItem> -->
+			<!-- <m:header> -->
+			<!-- <m:MaterialLink addStyleNames="active" text="e-Filling" -->
+			<!-- icon="mdi-social-people" textColor="red" /> -->
+			<!-- </m:header> -->
+			<!-- <m:content> -->
+			<!-- <m:MaterialPanel> -->
+			<!-- <m:MaterialLabel -->
+			<!-- text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
+				do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
+				minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
+				ea commodo consequat." /> -->
+			<!-- <m:MaterialRow> -->
+			<!-- <m:MaterialTextBox placeholder="CitizenID" /> -->
+			<!-- <m:MaterialTextBox placeholder="AcountingID" /> -->
+			<!-- <m:MaterialTextBox placeholder="First Name" /> -->
+			<!-- <m:MaterialTextBox placeholder="Last Name" /> -->
+			<!-- <m:MaterialTextBox placeholder="Email" /> -->
+			<!-- <m:MaterialTextBox placeholder="Telephone" /> -->
+			<!-- <m:MaterialButton text="Save"></m:MaterialButton> -->
+
+			<!-- </m:MaterialRow> -->
+			<!-- </m:MaterialPanel> -->
+			<!-- </m:content> -->
+			<!-- </m:MaterialCollapsibleItem> -->
+			<!-- </m:item> -->
+			<!-- <m:item> -->
+			<!-- <m:MaterialCollapsibleItem> -->
+			<!-- <m:header> -->
+			<!-- <m:MaterialLink text="ภาษีมรดก" icon="mdi-content-flag" -->
+			<!-- textColor="orange" /> -->
+			<!-- </m:header> -->
+			<!-- <m:content> -->
+			<!-- <m:MaterialLabel -->
+			<!-- text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
+				do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
+				minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
+				ea commodo consequat." /> -->
+			<!-- </m:content> -->
+			<!-- </m:MaterialCollapsibleItem> -->
+			<!-- </m:item> -->
+			<!-- <m:item> -->
+			<!-- <m:MaterialCollapsibleItem> -->
+			<!-- <m:header> -->
+			<!-- <m:MaterialLink text="บัญชีภาษีเบื้องต้น" icon="mdi-action-shopping-cart" -->
+			<!-- textColor="brown" /> -->
+			<!-- </m:header> -->
+			<!-- <m:content> -->
+			<!-- <m:MaterialLabel -->
+			<!-- text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
+				do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
+				minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
+				ea commodo consequat." /> -->
+			<!-- </m:content> -->
+			<!-- </m:MaterialCollapsibleItem> -->
+			<!-- </m:item> -->
+			<!-- <m:item> -->
+			<!-- <m:MaterialCollapsibleItem> -->
+			<!-- <m:header> -->
+			<!-- <m:MaterialLink text="ภาษีที่ดิน" icon="mdi-image-style" -->
+			<!-- textColor="blue" /> -->
+			<!-- </m:header> -->
+			<!-- <m:content> -->
+			<!-- <m:MaterialLabel -->
+			<!-- text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
+				do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
+				minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
+				ea commodo consequat." /> -->
+			<!-- </m:content> -->
+			<!-- </m:MaterialCollapsibleItem> -->
+			<!-- </m:item> -->
+			<!-- <m:item> -->
+			<!-- <m:MaterialCollapsibleItem> -->
+			<!-- <m:header> -->
+			<!-- <m:MaterialLink text="ภาษีบุคคลธรรมดา" icon="mdi-editor-insert-chart" -->
+			<!-- textColor="green" /> -->
+			<!-- </m:header> -->
+			<!-- <m:content> -->
+			<!-- <m:MaterialLabel -->
+			<!-- text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
+				do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
+				minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
+				ea commodo consequat." /> -->
+			<!-- </m:content> -->
+			<!-- </m:MaterialCollapsibleItem> -->
+			<!-- </m:item> -->
+			<!-- </m:MaterialCollapsible> -->
 		</m:MaterialContainer>
 
 		<m:MaterialFloatingContainer>

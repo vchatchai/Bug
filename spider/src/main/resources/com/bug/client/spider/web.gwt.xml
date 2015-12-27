@@ -15,7 +15,8 @@
 	<inherits name="com.bug.client.common"></inherits>
 	<inherits name="com.google.api.gwt.oauth2.OAuth2" />
 	<inherits name="com.google.gwt.i18n.I18N" />
-<!-- 	<extend-property name="locale" values="en" /> -->
+	<inherits name='com.google.gwt.user.theme.clean.Clean' />
+	<!-- <extend-property name="locale" values="en" /> -->
 
 	<!-- Other module inherits -->
 	<inherits name="com.google.gwt.activity.Activity" />
@@ -34,4 +35,6 @@
 	<!-- <source path="com.bug.client.common.webservice.Test" ></source> -->
 	<source path='ui' />
 
+  <!-- allow Super Dev Mode -->
+  <add-linker name="xsiframe"/>
 </module>
