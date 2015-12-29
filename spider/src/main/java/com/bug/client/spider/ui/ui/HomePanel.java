@@ -48,8 +48,8 @@ public class HomePanel extends Composite {
 		
 		
 //		registerPage.setText("Chatchai");
-//		setHomePage();
-		setTrainee();
+		setHomePage();
+//		setTrainee();
 	}
  
 //..loginPage
